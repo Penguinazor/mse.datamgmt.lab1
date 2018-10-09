@@ -10,7 +10,10 @@
 
 ### *(D)* Understanding the Lucene API
 
-1. The command line demo use stopword removal, indeed : "frame" and "the frame" give the same output  
+1. Yes, the demo uses the default stopword removal
+    - QueryParser takes as argument a [StandardAnalyzer()](http://lucene.apache.org/core/6_6_1/core/org/apache/lucene/analysis/standard/StandardAnalyzer.html?is-external=true) which is built by default with a default list of stopwords [`STOP_WORDS_SET`](http://lucene.apache.org/core/6_6_1/core/org/apache/lucene/analysis/standard/StandardAnalyzer.html#STOP_WORDS_SET)
+    - Proof: "frame" and "the frame" is giving the same output
+
 2. The command line demo don't use stemming, indeed : "information" and "informative" don't give the same output
 3. TODO
 
