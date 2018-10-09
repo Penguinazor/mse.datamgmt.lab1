@@ -21,7 +21,7 @@
     - Proof: "frame" and "frames" doesn’t give the same output
 
 3. The command line demo is case insensitive, indeed : "test" and "TEST" give the same output  
-
+   StandarAnalyser use LowerCaseFilter filter. This filter lowcases the queries.
 4. Yes, it does matter
     - In case of Normalisation: taking the words "been" and "being" as example, the normalisation of those words is "be", which is part of the [`STOP_WORDS_SET`](http://lucene.apache.org/core/6_6_1/core/org/apache/lucene/analysis/standard/StandardAnalyzer.html#STOP_WORDS_SET). We could lose information if the stemming is done before the normalisation.
     - Depends: If the stopwords are stemmed then we should stem first then apply the stopwords filter. Otherwise we would do the inverse.
