@@ -52,6 +52,11 @@ public class CACMIndexer implements ParserListener {
 		// TODO student: add to the document "doc" the fields given in
 		// parameters. You job is to use the right Field and FieldType
 		// for these parameters.
+		doc.add(id);
+		doc.add(authors);
+		doc.add(title);
+		doc.add(summary);
+		//
 
 		try {
 			this.indexWriter.addDocument(doc);
@@ -66,5 +71,4 @@ public class CACMIndexer implements ParserListener {
 		if(this.dir != null)
 			try { this.dir.close(); } catch(IOException e) { /* BEST EFFORT */ }
 	}
-	
 }
