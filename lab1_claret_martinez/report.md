@@ -34,7 +34,17 @@
 ### *(E)* Using Luke
 ### *(F)* Indexing and Searching the CACM collection
 #### Indexing
+Based on the [FieldType](http://lucene.apache.org/core/6_6_1/core/org/apache/lucene/document/FieldType.html) documentation 
+- `fieldType.setStoreTermVectorOffsets(true);`
+    - Store token character offsets into the term vector for this field.
+- `fieldType.setStoreTermVectorPayloads(true);`
+    - Store token payloads into the term vector for this field.
+- `fieldType.setStoreTermVectorPositions(true);`
+    - Store token positions into the term vector for this field.
+- `fieldType.setStoreTermVectors(true);`
+    - Store the indexed form into term vectors for this field.
 #### Using different Analyzers
+- http://lucene.apache.org/core/2_9_4/api/all/org/apache/lucene/analysis/StopAnalyzer.html
 #### Reading Index
 #### Searching
 #### Tuning the Lucene Score

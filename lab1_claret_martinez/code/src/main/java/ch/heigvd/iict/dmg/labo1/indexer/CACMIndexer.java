@@ -2,7 +2,8 @@ package ch.heigvd.iict.dmg.labo1.indexer;
 
 import ch.heigvd.iict.dmg.labo1.parsers.ParserListener;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.document.Document;
+import org.apache.lucene.document.*;
+import org.apache.lucene.index.IndexOptions;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.IndexWriterConfig.OpenMode;
@@ -13,6 +14,8 @@ import org.apache.lucene.store.FSDirectory;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.List;
 
 public class CACMIndexer implements ParserListener {
 	
@@ -52,11 +55,38 @@ public class CACMIndexer implements ParserListener {
 		// TODO student: add to the document "doc" the fields given in
 		// parameters. You job is to use the right Field and FieldType
 		// for these parameters.
-		doc.add(id);
-		doc.add(authors);
-		doc.add(title);
-		doc.add(summary);
 		//
+
+		//doc.add(id);
+		doc.add(new StoredField("id", id));
+
+		//doc.add(authors);
+		if (authors != null) {
+			List<String> authors_list = Arrays.asList(authors.split(";"));
+			for (String author : authors_list) {
+				doc.add(new StringField("authors", author, Field.Store.YES));
+			}
+		}
+
+		FieldType fieldType = new FieldType();
+		//fieldType.setDimensions(int dimensionCount, int dimensionNumBytes) //Enables points indexing.
+		//fieldType.setDocValuesType(DocValuesType type) //Sets the field's DocValuesType
+		fieldType.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS); //Sets the indexing options for the field:
+		//fieldType.setOmitNorms(boolean value) // Set to true to omit normalization values for the field.
+		fieldType.setStored(true); //Set to true to store this field.
+		fieldType.setStoreTermVectorOffsets(true); //Set to true to also store token character offsets into the term vector for this field.
+		fieldType.setStoreTermVectorPayloads(true); //Set to true to also store token payloads into the term vector for this field.
+		fieldType.setStoreTermVectorPositions(true); //Set to true to also store token positions into the term vector for this field.
+		fieldType.setStoreTermVectors(true); //Set to true if this field's indexed form should be also stored into term vectors.
+		fieldType.setTokenized(true); //Set to true to tokenize this field's contents via the configured Analyzer.
+
+		//doc.add(title);
+		doc.add(new Field("title", title, fieldType));
+
+		//doc.add(summary);
+		if (summary != null) {
+			doc.add(new Field("summary", summary, fieldType));
+		}
 
 		try {
 			this.indexWriter.addDocument(doc);
