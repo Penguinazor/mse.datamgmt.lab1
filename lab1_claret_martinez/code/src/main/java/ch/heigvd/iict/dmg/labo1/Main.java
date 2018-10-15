@@ -61,11 +61,12 @@ public class Main {
 
 	private static void searching(QueriesPerformer queriesPerformer) {
 		// Example
-		queriesPerformer.query("compiler program");
+		//queriesPerformer.query("compiler program");
 
 		// TODO student
-        // queriesPerformer.query(<containing the term Information Retrieval>);
-		// queriesPerformer.query(<containing both Information and Retrieval>);
+        queriesPerformer.query("Information Retrieval");
+		queriesPerformer.query("Information AND Retrieval");
+		queriesPerformer.query("+Retrieval ");
         // and so on for all the queries asked on the instructions...
         //
 		// Reminder: it must print the total number of results and
@@ -77,8 +78,8 @@ public class Main {
 	    // TODO student... For the part "Indexing and Searching CACM collection
 		// - Indexing" use, as indicated in the instructions,
 
-		StandardAnalyzer standardAnalyzer = new StandardAnalyzer();
-		return standardAnalyzer;
+		//StandardAnalyzer standardAnalyzer = new StandardAnalyzer();
+		//return standardAnalyzer;
 
 		//return new WhitespaceAnalyzer();
 		return new EnglishAnalyzer();

@@ -7,6 +7,7 @@ import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.LeafReaderContext;
 import org.apache.lucene.queryparser.classic.ParseException;
+import org.apache.lucene.queryparser.complexPhrase.ComplexPhraseQueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.queryparser.classic.QueryParser;
@@ -65,7 +66,7 @@ public class QueriesPerformer {
 		// See "Searching" section
 
 		System.out.println("Searching for [" + q +"]");
-		QueryParser parser = new QueryParser("title",this.analyzer);
+		ComplexPhraseQueryParser parser = new ComplexPhraseQueryParser("summary",this.analyzer);
 		try {
 			Query query = parser.parse(q);
 			try {
@@ -77,10 +78,9 @@ public class QueriesPerformer {
                     System.out.printf("%s : %s (%f)\n",search.scoreDocs[i].doc,this.indexReader.document(search.scoreDocs[i].doc).get("title"),search.scoreDocs[i].score);
                 }
 			}
-			catch (IOException ex_count){
-				System.out.println(ex_count);
+			catch (IOException ex_search){
+				System.out.println(ex_search);
 			}
-
 		}
 		catch (ParseException ex_parse){
 			System.out.println(ex_parse);
