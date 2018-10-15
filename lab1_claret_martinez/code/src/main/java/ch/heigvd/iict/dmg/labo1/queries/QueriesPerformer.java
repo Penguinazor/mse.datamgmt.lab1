@@ -3,10 +3,10 @@ package ch.heigvd.iict.dmg.labo1.queries;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.index.LeafReaderContext;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
-import org.apache.lucene.search.IndexSearcher;
-import org.apache.lucene.search.Query;
+import org.apache.lucene.search.*;
 import org.apache.lucene.search.similarities.Similarity;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
@@ -48,14 +48,28 @@ public class QueriesPerformer {
 		// See "Searching" section
 
 		System.out.println("Searching for [" + q +"]");
-		QueryParser parser = new QueryParser(q,this.analyzer);
+		QueryParser parser = new QueryParser("title",this.analyzer);
 		try {
 			Query query = parser.parse(q);
+			try {
+                TopDocs search = this.indexSearcher.search(query, 10);
+
+                System.out.printf("Total Results : %d\n",search.totalHits);
+
+                for (int i=0; i< 10 ; i++){
+                    System.out.printf("%s : %s (%f)\n",search.scoreDocs[i].doc,this.indexReader.document(search.scoreDocs[i].doc).get("title"),search.scoreDocs[i].score);
+                }
+			}
+			catch (IOException ex_count){
+				System.out.println(ex_count);
+			}
+
 		}
-		catch (ParseException pe){
-			System.out.println(pe);
+		catch (ParseException ex_parse){
+			System.out.println(ex_parse);
 		}
-		
+
+
 
 	}
 	 
