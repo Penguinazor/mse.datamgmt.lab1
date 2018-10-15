@@ -61,31 +61,37 @@ public class CACMIndexer implements ParserListener {
 		doc.add(new StoredField("id", id));
 
 		//doc.add(authors);
+		FieldType fieldType = new FieldType();
+		fieldType.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS);
+		fieldType.setStored(true);
+		fieldType.setStoreTermVectors(true);
+		fieldType.setTokenized(false);
 		if (authors != null) {
-			List<String> authors_list = Arrays.asList(authors.split(";"));
-			for (String author : authors_list) {
-				doc.add(new StringField("authors", author, Field.Store.YES));
+			for (String author : authors.split(";")) {
+				if (!author.trim().equals("")) {
+					doc.add(new Field("authors", author, fieldType));
+				}
 			}
 		}
 
-		FieldType fieldType = new FieldType();
-		//fieldType.setDimensions(int dimensionCount, int dimensionNumBytes) //Enables points indexing.
-		//fieldType.setDocValuesType(DocValuesType type) //Sets the field's DocValuesType
-		fieldType.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS); //Sets the indexing options for the field:
-		//fieldType.setOmitNorms(boolean value) // Set to true to omit normalization values for the field.
-		fieldType.setStored(true); //Set to true to store this field.
-		fieldType.setStoreTermVectorOffsets(true); //Set to true to also store token character offsets into the term vector for this field.
-		fieldType.setStoreTermVectorPayloads(true); //Set to true to also store token payloads into the term vector for this field.
-		fieldType.setStoreTermVectorPositions(true); //Set to true to also store token positions into the term vector for this field.
-		fieldType.setStoreTermVectors(true); //Set to true if this field's indexed form should be also stored into term vectors.
-		fieldType.setTokenized(true); //Set to true to tokenize this field's contents via the configured Analyzer.
+		FieldType fieldType2 = new FieldType();
+		//fieldType2.setDimensions(int dimensionCount, int dimensionNumBytes) //Enables points indexing.
+		//fieldType2.setDocValuesType(DocValuesType type) //Sets the field's DocValuesType
+		fieldType2.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS); //Sets the indexing options for the field:
+		//fieldType2.setOmitNorms(boolean value) // Set to true to omit normalization values for the field.
+		fieldType2.setStored(true); //Set to true to store this field.
+		fieldType2.setStoreTermVectorOffsets(true); //Set to true to also store token character offsets into the term vector for this field.
+		fieldType2.setStoreTermVectorPayloads(true); //Set to true to also store token payloads into the term vector for this field.
+		fieldType2.setStoreTermVectorPositions(true); //Set to true to also store token positions into the term vector for this field.
+		fieldType2.setStoreTermVectors(true); //Set to true if this field's indexed form should be also stored into term vectors.
+		fieldType2.setTokenized(true); //Set to true to tokenize this field's contents via the configured Analyzer.
 
 		//doc.add(title);
-		doc.add(new Field("title", title, fieldType));
+		doc.add(new Field("title", title, fieldType2));
 
 		//doc.add(summary);
 		if (summary != null) {
-			doc.add(new Field("summary", summary, fieldType));
+			doc.add(new Field("summary", summary, fieldType2));
 		}
 
 		try {
