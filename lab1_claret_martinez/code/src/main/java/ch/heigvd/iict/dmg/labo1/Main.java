@@ -81,15 +81,15 @@ public class Main {
 		//return standardAnalyzer;
 
 		//return new WhitespaceAnalyzer();
-		//return new EnglishAnalyzer();
+		return new EnglishAnalyzer();
 		//return new ShingleAnalyzerWrapper(standardAnalyzer, 2); //using shingle size 2
 		//return new ShingleAnalyzerWrapper(standardAnalyzer, 3); //using shingle size 3
-		try {
-			return new StopAnalyzer(Paths.get("common_words.txt"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
+		//try {
+		//	return new StopAnalyzer(Paths.get("common_words.txt"));
+		//} catch (IOException e) {
+		//	e.printStackTrace();
+		//}
+		//return null;
 
 	}
 
