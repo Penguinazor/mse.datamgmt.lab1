@@ -1,10 +1,14 @@
 package ch.heigvd.iict.dmg.labo1.queries;
 
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.misc.HighFreqTerms;
+import org.apache.lucene.misc.TermStats;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.LeafReaderContext;
 import org.apache.lucene.queryparser.classic.ParseException;
+import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.Query;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.*;
 import org.apache.lucene.search.similarities.Similarity;
@@ -40,7 +44,20 @@ public class QueriesPerformer {
 		// TODO student
 		// This methods print the top ranking term for a field.
 		// See "Reading Index".
-	    System.out.println("Top ranking terms for field ["  + field +"] are: ");
+
+		try {
+			TermStats[] termStats = HighFreqTerms.getHighFreqTerms(indexReader, numTerms, field, new HighFreqTerms.TotalTermFreqComparator());
+
+			System.out.println("Top ranking terms for field ["  + field +"] are: ");
+
+			for (TermStats term : termStats) {
+				System.out.println(term.docFreq + " " + term.termtext.utf8ToString());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+
 	}
 	
 	public void query(String q) {

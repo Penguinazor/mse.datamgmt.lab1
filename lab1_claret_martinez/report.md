@@ -81,5 +81,9 @@ Based on the [FieldType](http://lucene.apache.org/core/6_6_1/core/org/apache/luc
     - ![](imgs/StopAnalyzer-d.png)
     - Indexing time: 1188ms
 #### Reading Index
+1. What is the author with the highest number of publications? How many publications does he/she have?
+    - 38 **Thacher Jr., H. C.**
+2. List the top 10 terms in the title field with their frequency.
+    - ![](imgs/top-10-titles.png)
 #### Searching
 #### Tuning the Lucene Score
