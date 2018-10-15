@@ -44,7 +44,42 @@ Based on the [FieldType](http://lucene.apache.org/core/6_6_1/core/org/apache/luc
 - `fieldType.setStoreTermVectors(true);`
     - Store the indexed form into term vectors for this field.
 #### Using different Analyzers
-- http://lucene.apache.org/core/2_9_4/api/all/org/apache/lucene/analysis/StopAnalyzer.html
+- **StandardAnalyzer**
+    - ![](imgs/StandardAnalyzer-a.png)
+    - ![](imgs/StandardAnalyzer-b.png)
+    - ![](imgs/StandardAnalyzer-c.png)
+    - ![](imgs/StandardAnalyzer-d.png)
+    - Indexing time: 1294ms
+- **WhitespaceAnalyzer**
+    - ![](imgs/WhitespaceAnalyzer-a.png)
+    - ![](imgs/WhitespaceAnalyzer-b.png)
+    - ![](imgs/WhitespaceAnalyzer-c.png)
+    - ![](imgs/WhitespaceAnalyzer-d.png)
+    - Indexing time: 1453ms
+- **EnglishAnalyzer**
+    - ![](imgs/EnglishAnalyzer-a.png)
+    - ![](imgs/EnglishAnalyzer-b.png)
+    - ![](imgs/EnglishAnalyzer-c.png)
+    - ![](imgs/EnglishAnalyzer-d.png)
+    - Indexing time: 1386ms
+- **ShingleAnalyzerWrapper (shingle size 2)**
+    - ![](imgs/ShingleAnalyzerWrapper2-a.png)
+    - ![](imgs/ShingleAnalyzerWrapper2-b.png)
+    - ![](imgs/ShingleAnalyzerWrapper2-c.png)
+    - ![](imgs/ShingleAnalyzerWrapper2-d.png)
+    - Indexing time: 2181ms
+- **ShingleAnalyzerWrapper (shingle size 3)**
+    - ![](imgs/ShingleAnalyzerWrapper3-a.png)
+    - ![](imgs/ShingleAnalyzerWrapper3-b.png)
+    - ![](imgs/ShingleAnalyzerWrapper3-c.png)
+    - ![](imgs/ShingleAnalyzerWrapper3-d.png)
+    - Indexing time: 2863ms
+- [**StopAnalyzer**](http://lucene.apache.org/core/2_9_4/api/all/org/apache/lucene/analysis/StopAnalyzer.html)
+    - ![](imgs/StopAnalyzer-a.png)
+    - ![](imgs/StopAnalyzer-b.png)
+    - ![](imgs/StopAnalyzer-c.png)
+    - ![](imgs/StopAnalyzer-d.png)
+    - Indexing time: 1188ms
 #### Reading Index
 #### Searching
 #### Tuning the Lucene Score

@@ -20,6 +20,9 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		//timer start
+		long tac = System.currentTimeMillis();
+
 		// 1.1. create an analyzer
 		Analyzer analyser = getAnalyzer();
 
@@ -32,8 +35,12 @@ public class Main {
 		CACMParser parser = new CACMParser("documents/cacm.txt", indexer);
 		parser.startParsing();
 		indexer.finalizeIndex();
-		
+
+		//tic
+		System.out.println("Indexing time: " + (System.currentTimeMillis()-tac) + "ms");
+
 		QueriesPerformer queriesPerformer = new QueriesPerformer(analyser, similarity);
+
 
 		// Section "Reading Index"
 		readingIndex(queriesPerformer);
@@ -69,17 +76,18 @@ public class Main {
 		// - Indexing" use, as indicated in the instructions,
 
 		StandardAnalyzer standardAnalyzer = new StandardAnalyzer();
-		return standardAnalyzer;
+		//return standardAnalyzer;
 
 		//return new WhitespaceAnalyzer();
 		//return new EnglishAnalyzer();
 		//return new ShingleAnalyzerWrapper(standardAnalyzer, 2); //using shingle size 2
 		//return new ShingleAnalyzerWrapper(standardAnalyzer, 3); //using shingle size 3
-		//try {
-		//	return new StopAnalyzer(Paths.get("common_words.txt"));
-		//} catch (IOException e) {
-		//	e.printStackTrace();
-		//}
+		try {
+			return new StopAnalyzer(Paths.get("common_words.txt"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 
 	}
 
