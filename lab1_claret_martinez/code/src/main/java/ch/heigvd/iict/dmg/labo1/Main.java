@@ -13,7 +13,6 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.search.similarities.ClassicSimilarity;
 import org.apache.lucene.search.similarities.Similarity;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 
@@ -83,9 +82,9 @@ public class Main {
 	    // TODO student... For the part "Indexing and Searching CACM collection
 		// - Indexing" use, as indicated in the instructions,
 
-		//StandardAnalyzer standardAnalyzer = new StandardAnalyzer();
-		//return standardAnalyzer;
+		StandardAnalyzer standardAnalyzer = new StandardAnalyzer();
 
+		//return standardAnalyzer;
 		//return new WhitespaceAnalyzer();
 		return new EnglishAnalyzer();
 		//return new ShingleAnalyzerWrapper(standardAnalyzer, 2); //using shingle size 2

@@ -14,8 +14,6 @@ import org.apache.lucene.store.FSDirectory;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.List;
 
 public class CACMIndexer implements ParserListener {
 	
