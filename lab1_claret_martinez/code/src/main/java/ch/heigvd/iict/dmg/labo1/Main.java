@@ -27,8 +27,8 @@ public class Main {
 		Analyzer analyser = getAnalyzer();
 
 		// TODO student "Tuning the Lucene Score"
-//		Similarity similarity = null;//new MySimilarity();
-		Similarity similarity = new MySimilarity();
+		Similarity similarity = null;//new MySimilarity();
+		//Similarity similarity = new MySimilarity();
 		
 		CACMIndexer indexer = new CACMIndexer(analyser, similarity);
 		indexer.openIndex();
