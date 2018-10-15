@@ -39,6 +39,7 @@ public class Main {
 		//tic
 		System.out.println("Indexing time: " + (System.currentTimeMillis()-tac) + "ms");
 
+
 		QueriesPerformer queriesPerformer = new QueriesPerformer(analyser, similarity);
 
 
@@ -68,7 +69,8 @@ public class Main {
         // and so on for all the queries asked on the instructions...
         //
 		// Reminder: it must print the total number of results and
-		// the top 10 results.
+		// the top 10 results
+
 	}
 
 	private static Analyzer getAnalyzer() {

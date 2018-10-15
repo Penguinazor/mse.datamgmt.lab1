@@ -3,7 +3,10 @@ package ch.heigvd.iict.dmg.labo1.queries;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.queryparser.classic.ParseException;
+import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.Query;
 import org.apache.lucene.search.similarities.Similarity;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
@@ -45,6 +48,15 @@ public class QueriesPerformer {
 		// See "Searching" section
 
 		System.out.println("Searching for [" + q +"]");
+		QueryParser parser = new QueryParser(q,this.analyzer);
+		try {
+			Query query = parser.parse(q);
+		}
+		catch (ParseException pe){
+			System.out.println(pe);
+		}
+		
+
 	}
 	 
 	public void close() {
