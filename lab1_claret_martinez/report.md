@@ -28,7 +28,7 @@
     - In case of Normalisation: taking the words "been" and "being" as example, the normalisation of those words is "be", which is part of the [`STOP_WORDS_SET`](http://lucene.apache.org/core/6_6_1/core/org/apache/lucene/analysis/standard/StandardAnalyzer.html#STOP_WORDS_SET). We could lose information if the stemming is done before the normalisation.
     - Depends: If the stopwords are stemmed then we should stem first then apply the stopwords filter. Otherwise we would do the inverse.
 
---- 
+---
 # TODO
 
 ### *(E)* Using Luke
@@ -86,4 +86,26 @@ Based on the [FieldType](http://lucene.apache.org/core/6_6_1/core/org/apache/luc
 2. List the top 10 terms in the title field with their frequency.
     - ![](imgs/top-10-titles.png)
 #### Searching
+
+```java
+System.out.println("Searching for [" + q +"]");
+ComplexPhraseQueryParser parser = new ComplexPhraseQueryParser("summary",this.analyzer);
+try {
+   Query query = parser.parse(q);
+   try {
+              TopDocs search = this.indexSearcher.search(query, 10);
+              System.out.printf("Total Results : %d\n",search.totalHits);
+              for (int i=0; i< 10 ; i++){
+                  System.out.printf("%s : %s (%f)\n",search.scoreDocs[i].doc,this.indexReader.document(search.scoreDocs[i].doc).get("title"),search.scoreDocs[i].score);
+              }
+   }
+   catch (IOException ex_search){
+      System.out.println(ex_search);
+   }
+}
+catch (ParseException ex_parse){
+   System.out.println(ex_parse);
+}
+```
+
 #### Tuning the Lucene Score

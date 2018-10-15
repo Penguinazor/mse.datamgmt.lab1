@@ -66,7 +66,9 @@ public class Main {
 		// TODO student
         queriesPerformer.query("Information Retrieval");
 		queriesPerformer.query("Information AND Retrieval");
-		queriesPerformer.query("+Retrieval ");
+		queriesPerformer.query("+Retrieval Information -Database");
+        queriesPerformer.query("Info*");
+
         // and so on for all the queries asked on the instructions...
         //
 		// Reminder: it must print the total number of results and
