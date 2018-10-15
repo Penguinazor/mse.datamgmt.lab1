@@ -68,7 +68,7 @@ public class Main {
 		queriesPerformer.query("Information AND Retrieval");
 		queriesPerformer.query("+Retrieval Information -Database");
         queriesPerformer.query("Info*");
-
+		queriesPerformer.query("Information Retrieval~5");
         // and so on for all the queries asked on the instructions...
         //
 		// Reminder: it must print the total number of results and
