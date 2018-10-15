@@ -1,6 +1,7 @@
 package ch.heigvd.iict.dmg.labo1.queries;
 
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.misc.HighFreqTerms;
 import org.apache.lucene.misc.TermStats;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
